@@ -7,12 +7,9 @@ import { FaqList } from "@/src/components/marketing/FaqList";
 import { LeadCtaSection } from "@/src/components/marketing/LeadCtaSection";
 import { LEAD_COPY, SERVICES_FAQ } from "@/src/lib/content";
 import { JsonLd } from "@/src/components/seo/JsonLd";
-import {
-  buildMetadata,
-  jsonLdGraph,
-  organizationLd,
-  professionalServiceLd,
-} from "@/src/lib/seo";
+import { buildMetadata } from "@/src/lib/seo";
+import { buildOrganizationSchema } from "@/src/lib/seo/schemas/organization";
+import { buildAllServiceSchemas } from "@/src/lib/seo/schemas/services";
 
 export const metadata = buildMetadata({
   title:
@@ -26,7 +23,7 @@ export default function ServicesPage() {
   return (
     <>
       <JsonLd
-        data={jsonLdGraph([organizationLd(), professionalServiceLd()])}
+        data={[buildOrganizationSchema(), ...buildAllServiceSchemas()]}
       />
       <PageHero
         eyebrow="บริการ Consulting"

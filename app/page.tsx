@@ -16,14 +16,11 @@ import {
 } from "@/src/lib/content";
 import { estimateProject, formatTHB } from "@/src/lib/estimation";
 import { JsonLd } from "@/src/components/seo/JsonLd";
-import {
-  buildMetadata,
-  jsonLdGraph,
-  organizationLd,
-  websiteLd,
-  professionalServiceLd,
-  faqPageLd,
-} from "@/src/lib/seo";
+import { buildMetadata } from "@/src/lib/seo";
+import { buildOrganizationSchema } from "@/src/lib/seo/schemas/organization";
+import { buildWebSiteSchema } from "@/src/lib/seo/schemas/website";
+import { buildPersonSchema } from "@/src/lib/seo/schemas/person";
+import { buildFaqSchema } from "@/src/lib/seo/schemas/faq";
 
 export const metadata = buildMetadata({
   absoluteTitle:
@@ -47,12 +44,12 @@ export default function HomePage() {
   return (
     <>
       <JsonLd
-        data={jsonLdGraph([
-          organizationLd(),
-          websiteLd(),
-          professionalServiceLd(),
-          faqPageLd(),
-        ])}
+        data={[
+          buildOrganizationSchema(),
+          buildWebSiteSchema(),
+          buildPersonSchema(),
+          buildFaqSchema(),
+        ]}
       />
 
       {/* 1. Hero */}

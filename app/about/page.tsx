@@ -3,6 +3,8 @@ import { Section, SectionHeading } from "@/src/components/ui/Section";
 import { Card } from "@/src/components/ui/Card";
 import { CtaSection } from "@/src/components/marketing/CtaSection";
 import { buildMetadata } from "@/src/lib/seo";
+import { JsonLd } from "@/src/components/seo/JsonLd";
+import { buildPersonSchema } from "@/src/lib/seo/schemas/person";
 
 export const metadata = buildMetadata({
   title: "เกี่ยวกับเรา",
@@ -29,6 +31,7 @@ const PRINCIPLES = [
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={buildPersonSchema()} />
       <PageHero
         eyebrow="เกี่ยวกับเรา"
         title="เครื่องมือและที่ปรึกษาสำหรับงาน Software Project"

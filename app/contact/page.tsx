@@ -6,6 +6,8 @@ import { ContactForm } from "@/src/components/contact/ContactForm";
 import { LeadCtaSection } from "@/src/components/marketing/LeadCtaSection";
 import { SITE, LEAD_COPY } from "@/src/lib/content";
 import { buildMetadata } from "@/src/lib/seo";
+import { JsonLd } from "@/src/components/seo/JsonLd";
+import { buildOrganizationSchema } from "@/src/lib/seo/schemas/organization";
 
 export const metadata = buildMetadata({
   title: "ติดต่อเรา",
@@ -17,6 +19,7 @@ export const metadata = buildMetadata({
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={buildOrganizationSchema()} />
       <PageHero
         eyebrow="ติดต่อ"
         title="ปรึกษาโปรเจกต์ของคุณกับทีม PM"

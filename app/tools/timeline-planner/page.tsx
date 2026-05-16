@@ -3,12 +3,8 @@ import { Section } from "@/src/components/ui/Section";
 import { TimelinePlanner } from "@/src/components/timeline/TimelinePlanner";
 import { CtaSection } from "@/src/components/marketing/CtaSection";
 import { JsonLd } from "@/src/components/seo/JsonLd";
-import {
-  buildMetadata,
-  jsonLdGraph,
-  organizationLd,
-  softwareApplicationLd,
-} from "@/src/lib/seo";
+import { buildMetadata } from "@/src/lib/seo";
+import { buildTimelinePlannerSchema } from "@/src/lib/seo/schemas/software-apps";
 
 // Spec §16. Page is a server component so it can export metadata; the
 // interactive tool lives in the <TimelinePlanner /> client component.
@@ -23,7 +19,7 @@ export const metadata = buildMetadata({
 export default function TimelinePlannerPage() {
   return (
     <>
-      <JsonLd data={jsonLdGraph([organizationLd(), softwareApplicationLd()])} />
+      <JsonLd data={buildTimelinePlannerSchema()} />
       <PageHero
         eyebrow="Tool · ใช้งานได้แล้ว"
         title="Timeline Planner"
