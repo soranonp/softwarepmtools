@@ -38,11 +38,13 @@ export const metadata: Metadata = {
     url: SITE.url,
     title: `${SITE.name} | ประเมินราคา Software, Man-day และ Timeline ฟรี`,
     description: DEFAULT_DESCRIPTION,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: SITE.name }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE.name} | ประเมินราคา Software, Man-day และ Timeline ฟรี`,
     description: DEFAULT_DESCRIPTION,
+    images: ["/og.png"],
   },
   category: "Business",
 };

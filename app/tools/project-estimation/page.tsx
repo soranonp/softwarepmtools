@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PageHero } from "@/src/components/marketing/PageHero";
 import { Section } from "@/src/components/ui/Section";
 import { EstimationCalculator } from "@/src/components/calculator/EstimationCalculator";
@@ -36,9 +37,9 @@ export default function ProjectEstimationPage() {
           ใช้เพื่อการวางแผนเบื้องต้นเท่านั้น ไม่ใช่ใบเสนอราคา
           ตัวเลขจริงขึ้นกับ Requirement ทีมงาน และเงื่อนไขสัญญา
           อ่านเพิ่มเติมใน{" "}
-          <a href="/disclaimer" className="font-semibold text-brand-600">
+          <Link href="/disclaimer" className="font-semibold text-brand-600">
             ข้อจำกัดความรับผิดชอบ
-          </a>
+          </Link>
         </p>
       </Section>
       <CtaSection

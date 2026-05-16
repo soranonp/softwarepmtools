@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/src/lib/content";
 
+// Emit a static sitemap.xml at build time (required for `output: export`).
+export const dynamic = "force-static";
+
 const ROUTES = [
   "",
   "/tools",

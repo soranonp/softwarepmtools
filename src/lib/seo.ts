@@ -42,6 +42,13 @@ export function buildMetadata({
 }: BuildMetadataArgs): Metadata {
   const ogTitle = absoluteTitle ?? `${title} | ${SITE.name}`;
   const canonical = path === "/" ? "/" : path;
+  // Static OG asset in /public — works on a fully static host (Cloudflare Pages).
+  const ogImage = {
+    url: "/og.png",
+    width: 1200,
+    height: 630,
+    alt: SITE.name,
+  };
 
   return {
     title: absoluteTitle ? { absolute: absoluteTitle } : title,
@@ -55,11 +62,13 @@ export function buildMetadata({
       url: `${SITE.url}${path === "/" ? "" : path}`,
       title: ogTitle,
       description,
+      images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
       title: ogTitle,
       description,
+      images: ["/og.png"],
     },
   };
 }
@@ -95,7 +104,7 @@ export function professionalServiceLd() {
     "@type": "ProfessionalService",
     name: `${SITE.name} — Software Project Consulting`,
     url: `${SITE.url}/services`,
-    image: `${SITE.url}/opengraph-image`,
+    image: `${SITE.url}/og.png`,
     description:
       "บริการที่ปรึกษา Software Project: รีวิวผลประเมิน เตรียม SOW ตรวจข้อเสนอ Vendor และ PM-as-a-Service",
     areaServed: { "@type": "Country", name: "Thailand" },
