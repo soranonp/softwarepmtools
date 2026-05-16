@@ -7,9 +7,9 @@ import { ServicePackages } from "@/src/components/marketing/ServicePackages";
 import { FaqList } from "@/src/components/marketing/FaqList";
 import { LeadCtaSection } from "@/src/components/marketing/LeadCtaSection";
 import { EstimatePreviewCard } from "@/src/components/marketing/EstimatePreviewCard";
+import ProblemSolutionSection from "@/src/components/home/ProblemSolutionSection";
 import {
   HERO,
-  PAIN_POINTS,
   CAPABILITIES,
   TRUST_POINTS,
   LEAD_COPY,
@@ -107,22 +107,8 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* 2. Pain points */}
-      <Section tone="surface">
-        <SectionHeading
-          eyebrow="ปัญหาที่พบบ่อย"
-          title="เริ่ม Software Project ทั้งที ไม่ควรเดา"
-          description="ก่อนเซ็นสัญญากับ Vendor หลายองค์กรเจอปัญหาเดิม ๆ เพราะไม่มีตัวเลขตั้งต้น"
-        />
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {PAIN_POINTS.map((p) => (
-            <Card key={p} className="flex items-start gap-3">
-              <span className="mt-0.5 text-lg text-brand-600">✕</span>
-              <span className="text-sm font-medium text-navy-800">{p}</span>
-            </Card>
-          ))}
-        </div>
-      </Section>
+      {/* 2. Problem → Solution → CTA */}
+      <ProblemSolutionSection />
 
       {/* 3. What it helps with */}
       <Section>

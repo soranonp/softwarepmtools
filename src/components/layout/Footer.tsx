@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { NAV, SITE, LEAD_CTAS, LEAD_COPY } from "@/src/lib/content";
+import { NAV, TOOLS_NAV, SITE, LEAD_CTAS, LEAD_COPY } from "@/src/lib/content";
 import { Container } from "@/src/components/ui/Container";
 import { ButtonLink } from "@/src/components/ui/Button";
 
@@ -31,7 +31,7 @@ export function Footer() {
           </ButtonLink>
         </div>
 
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2.5">
               <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10">
@@ -51,6 +51,22 @@ export function Footer() {
               ออกแบบจากมุมมอง Software Project Management
             </p>
             <p className="mt-5 text-sm text-brand-100">{SITE.email}</p>
+          </div>
+
+          <div>
+            <p className="text-sm font-semibold text-white">เครื่องมือ</p>
+            <ul className="mt-4 space-y-2.5">
+              {TOOLS_NAV.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-brand-100 transition-colors hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div>

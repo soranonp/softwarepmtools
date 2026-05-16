@@ -14,9 +14,17 @@ export const NAV: { label: string; href: string }[] = [
   { label: "หน้าแรก", href: "/" },
   { label: "Tools", href: "/tools" },
   { label: "ประเมินโปรเจกต์", href: "/tools/project-estimation" },
+  { label: "วางแผน Timeline", href: "/tools/timeline-planner" },
   { label: "บริการ", href: "/services" },
   { label: "เกี่ยวกับ", href: "/about" },
   { label: "ติดต่อ", href: "/contact" },
+];
+
+/** Available tools — shown in the footer "เครื่องมือ" section (spec §17). */
+export const TOOLS_NAV: { label: string; href: string }[] = [
+  { label: "ประเมินโปรเจกต์", href: "/tools/project-estimation" },
+  { label: "วางแผน Timeline", href: "/tools/timeline-planner" },
+  { label: "เครื่องมือทั้งหมด", href: "/tools" },
 ];
 
 export const PRIMARY_CTA = {
@@ -136,9 +144,10 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
         id: "timeline-planner",
         name: "Timeline Planner",
         description:
-          "วางแผน Phase และ Milestone ของโครงการให้สอดคล้องกับ Man-day ที่ประเมินไว้",
-        status: "coming_soon",
+          "วางแผน Phase และ Task พร้อม Gantt Chart รวมวันหยุดไทยและ Dependencies Export Excel/PDF ได้",
+        status: "available",
         targetUser: "Project Manager, Delivery Lead",
+        href: "/tools/timeline-planner",
       },
       {
         id: "team-role-breakdown",

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { estimateProject, formatTHB } from "@/src/lib/estimation";
 import {
   SITE,
@@ -506,6 +507,18 @@ function ResultPanel({ result }: { result: EstimationResult }) {
           </p>
         </div>
       </Card>
+
+      <Link
+        href="/tools/timeline-planner"
+        className="flex items-center justify-between gap-4 rounded-2xl border border-brand-100 bg-brand-50 px-6 py-5 transition-colors hover:border-brand-600"
+      >
+        <span className="text-sm font-semibold leading-7 text-navy-900">
+          ลองวางแผน Timeline สำหรับโปรเจกต์นี้ด้วย Timeline Planner ฟรี
+        </span>
+        <span className="shrink-0 text-base font-bold text-brand-700">
+          วางแผน Timeline →
+        </span>
+      </Link>
 
       <div className="relative overflow-hidden rounded-2xl border border-navy-800 bg-navy-900 p-6 text-white shadow-card sm:p-8">
         <div className="bg-grid-dark absolute inset-0" aria-hidden />
