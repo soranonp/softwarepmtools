@@ -44,10 +44,10 @@ export function buildMetadata({
   const canonical = path === "/" ? "/" : path;
   // Static OG asset in /public — works on a fully static host (Cloudflare Pages).
   const ogImage = {
-    url: "/og.png",
+    url: "/og-image.png",
     width: 1200,
     height: 630,
-    alt: SITE.name,
+    alt: "Software PM Tools - ประเมินงบประมาณ Software Project",
   };
 
   return {
@@ -68,7 +68,7 @@ export function buildMetadata({
       card: "summary_large_image",
       title: ogTitle,
       description,
-      images: ["/og.png"],
+      images: ["/og-image.png"],
     },
   };
 }
@@ -104,7 +104,7 @@ export function professionalServiceLd() {
     "@type": "ProfessionalService",
     name: `${SITE.name} — Software Project Consulting`,
     url: `${SITE.url}/services`,
-    image: `${SITE.url}/og.png`,
+    image: `${SITE.url}/og-image.png`,
     description:
       "บริการที่ปรึกษา Software Project: รีวิวผลประเมิน เตรียม SOW ตรวจข้อเสนอ Vendor และ PM-as-a-Service",
     areaServed: { "@type": "Country", name: "Thailand" },

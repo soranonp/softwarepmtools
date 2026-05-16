@@ -26,6 +26,14 @@ export const metadata: Metadata = {
   keywords: SEO_KEYWORDS,
   applicationName: SITE.name,
   alternates: { canonical: "/" },
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    shortcut: "/favicon.ico",
+  },
   robots: {
     index: true,
     follow: true,
@@ -38,13 +46,20 @@ export const metadata: Metadata = {
     url: SITE.url,
     title: `${SITE.name} | ประเมินราคา Software, Man-day และ Timeline ฟรี`,
     description: DEFAULT_DESCRIPTION,
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: SITE.name }],
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Software PM Tools - ประเมินงบประมาณ Software Project",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE.name} | ประเมินราคา Software, Man-day และ Timeline ฟรี`,
     description: DEFAULT_DESCRIPTION,
-    images: ["/og.png"],
+    images: ["/og-image.png"],
   },
   category: "Business",
 };
