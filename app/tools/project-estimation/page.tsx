@@ -4,12 +4,8 @@ import { Section } from "@/src/components/ui/Section";
 import { EstimationCalculator } from "@/src/components/calculator/EstimationCalculator";
 import { CtaSection } from "@/src/components/marketing/CtaSection";
 import { JsonLd } from "@/src/components/seo/JsonLd";
-import {
-  buildMetadata,
-  jsonLdGraph,
-  organizationLd,
-  softwareApplicationLd,
-} from "@/src/lib/seo";
+import { buildMetadata } from "@/src/lib/seo";
+import { buildEstimationCalculatorSchema } from "@/src/lib/seo/schemas/software-apps";
 
 export const metadata = buildMetadata({
   absoluteTitle:
@@ -22,9 +18,7 @@ export const metadata = buildMetadata({
 export default function ProjectEstimationPage() {
   return (
     <>
-      <JsonLd
-        data={jsonLdGraph([organizationLd(), softwareApplicationLd()])}
-      />
+      <JsonLd data={buildEstimationCalculatorSchema()} />
       <PageHero
         eyebrow="Tool · ใช้งานได้แล้ว"
         title="Software Project Estimation Calculator"
