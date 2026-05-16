@@ -1,65 +1,269 @@
-import Image from "next/image";
+import { Section, SectionHeading } from "@/src/components/ui/Section";
+import { Container } from "@/src/components/ui/Container";
+import { Card } from "@/src/components/ui/Card";
+import { ButtonLink } from "@/src/components/ui/Button";
+import { ToolsGrid } from "@/src/components/marketing/ToolsGrid";
+import { ServicePackages } from "@/src/components/marketing/ServicePackages";
+import { FaqList } from "@/src/components/marketing/FaqList";
+import { LeadCtaSection } from "@/src/components/marketing/LeadCtaSection";
+import { EstimatePreviewCard } from "@/src/components/marketing/EstimatePreviewCard";
+import {
+  HERO,
+  PAIN_POINTS,
+  CAPABILITIES,
+  TRUST_POINTS,
+  LEAD_COPY,
+} from "@/src/lib/content";
+import { estimateProject, formatTHB } from "@/src/lib/estimation";
+import { JsonLd } from "@/src/components/seo/JsonLd";
+import {
+  buildMetadata,
+  jsonLdGraph,
+  organizationLd,
+  websiteLd,
+  professionalServiceLd,
+  faqPageLd,
+} from "@/src/lib/seo";
 
-export default function Home() {
+export const metadata = buildMetadata({
+  absoluteTitle:
+    "Software PM Tools | ประเมินราคา Software, Man-day และ Timeline ฟรี",
+  description:
+    "เครื่องมือช่วย IT PM, BA, Founder และเจ้าของธุรกิจ ประเมินงบประมาณ Man-day Timeline และ Scope ก่อนเริ่มจ้างทำ Software, Web App, Mobile App หรือระบบองค์กร",
+  path: "/",
+});
+
+const SAMPLE = estimateProject({
+  projectType: "web_app",
+  mainFeatures: 12,
+  userRoles: 3,
+  complexity: "medium",
+  integration: "payment_email_line",
+  reportLevel: "basic",
+  availableBudget: 0,
+});
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      <JsonLd
+        data={jsonLdGraph([
+          organizationLd(),
+          websiteLd(),
+          professionalServiceLd(),
+          faqPageLd(),
+        ])}
+      />
+
+      {/* 1. Hero */}
+      <section className="relative overflow-hidden border-b border-line bg-white">
+        <div className="bg-grid absolute inset-0" aria-hidden />
+        <div
+          className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-100 to-transparent"
+          aria-hidden
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+        <Container className="relative py-16 sm:py-24">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <div>
+              <p className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-semibold text-brand-700 ring-1 ring-brand-100 ring-inset">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand-600" />
+                สำหรับ IT PM · BA · เจ้าของธุรกิจ · ทีมพัฒนา
+              </p>
+              <h1 className="mt-5 text-4xl font-bold leading-tight tracking-tight text-ink sm:text-5xl">
+                {HERO.headline}
+              </h1>
+              <p className="mt-6 text-lg leading-8 text-muted">
+                {HERO.subheadline}
+              </p>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <ButtonLink href={HERO.primaryCta.href} size="lg">
+                  {HERO.primaryCta.label}
+                </ButtonLink>
+                <ButtonLink
+                  href={HERO.secondaryCta.href}
+                  variant="secondary"
+                  size="lg"
+                >
+                  {HERO.secondaryCta.label}
+                </ButtonLink>
+              </div>
+              <ul className="mt-9 grid gap-2.5 sm:grid-cols-2">
+                {TRUST_POINTS.map((t) => (
+                  <li
+                    key={t}
+                    className="flex items-start gap-2 text-sm text-navy-800"
+                  >
+                    <span className="mt-0.5 font-bold text-brand-600">✓</span>
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="lg:pl-6">
+              <EstimatePreviewCard result={SAMPLE} />
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* 2. Pain points */}
+      <Section tone="surface">
+        <SectionHeading
+          eyebrow="ปัญหาที่พบบ่อย"
+          title="เริ่ม Software Project ทั้งที ไม่ควรเดา"
+          description="ก่อนเซ็นสัญญากับ Vendor หลายองค์กรเจอปัญหาเดิม ๆ เพราะไม่มีตัวเลขตั้งต้น"
+        />
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {PAIN_POINTS.map((p) => (
+            <Card key={p} className="flex items-start gap-3">
+              <span className="mt-0.5 text-lg text-brand-600">✕</span>
+              <span className="text-sm font-medium text-navy-800">{p}</span>
+            </Card>
+          ))}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </Section>
+
+      {/* 3. What it helps with */}
+      <Section>
+        <SectionHeading
+          eyebrow="Software PM Tools ช่วยอะไร"
+          title="เปลี่ยนการเดา ให้เป็นการวางแผนที่มีตัวเลขรองรับ"
+        />
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {CAPABILITIES.map((c) => (
+            <Card key={c.title}>
+              <h3 className="text-base font-bold text-navy-900">
+                {c.title}
+              </h3>
+              <p className="mt-2 text-sm leading-7 text-muted">{c.desc}</p>
+            </Card>
+          ))}
         </div>
-      </main>
-    </div>
+      </Section>
+
+      {/* 4. Tools preview */}
+      <Section tone="surface">
+        <SectionHeading
+          eyebrow="Tools"
+          title="ชุดเครื่องมือสำหรับงาน PM ซอฟต์แวร์"
+          description="เริ่มจากเครื่องมือประเมินโปรเจกต์ และจะทยอยเปิดเครื่องมืออื่นเพิ่ม"
+        />
+        <div className="mt-10">
+          <ToolsGrid />
+        </div>
+        <div className="mt-8">
+          <ButtonLink href="/tools" variant="secondary">
+            ดู Tools ทั้งหมด
+          </ButtonLink>
+        </div>
+      </Section>
+
+      {/* 5. Example estimation result preview */}
+      <Section>
+        <SectionHeading
+          eyebrow="ตัวอย่างผลลัพธ์"
+          title="ผลประเมินที่คุณจะได้รับ"
+          description="ตัวอย่าง: Web Application 12 ฟีเจอร์ 3 Role ความซับซ้อนปานกลาง"
+        />
+        <div className="mt-7 flex flex-wrap gap-2">
+          {[
+            "Web App",
+            "12 Features",
+            "3 Roles",
+            "Complexity: Medium",
+            "Integration: Payment/LINE",
+          ].map((t) => (
+            <span
+              key={t}
+              className="rounded-md bg-surface px-3 py-1 text-xs font-medium text-muted ring-1 ring-line ring-inset"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            {
+              label: "Total Man-day",
+              value: `${SAMPLE.totalMD} MD`,
+              sub: "รวมทุกบทบาทในทีม",
+            },
+            {
+              label: "กรอบงบประมาณ",
+              value: formatTHB(SAMPLE.budgetRange.conservative),
+              sub: `ถึง ${formatTHB(SAMPLE.budgetRange.highComplexity)}`,
+            },
+            {
+              label: "Timeline ที่แนะนำ",
+              value: SAMPLE.timeline.label,
+              sub: "ตามปริมาณงานรวม",
+            },
+            {
+              label: "แพ็กเกจที่แนะนำ",
+              value: SAMPLE.recommendedPackageLabel,
+              sub: "ตามระดับงบประมาณ",
+            },
+          ].map((m) => (
+            <Card
+              key={m.label}
+              elevated
+              className="relative overflow-hidden p-6"
+            >
+              <span
+                className="absolute inset-x-0 top-0 h-1 bg-brand-600"
+                aria-hidden
+              />
+              <p className="text-sm text-muted">{m.label}</p>
+              <p className="mt-2 text-xl font-bold text-navy-900">
+                {m.value}
+              </p>
+              <p className="mt-1 text-xs text-faint">{m.sub}</p>
+            </Card>
+          ))}
+        </div>
+        <div className="mt-8">
+          <ButtonLink href="/tools/project-estimation" size="lg">
+            ลองประเมินโปรเจกต์ของคุณ
+          </ButtonLink>
+        </div>
+      </Section>
+
+      {/* 6. Service packages preview */}
+      <Section tone="surface">
+        <SectionHeading
+          eyebrow="บริการ Consulting"
+          title="ให้ทีม PM ช่วยตรวจสอบและเตรียมงานให้พร้อม"
+          description="ต่อยอดจากผลประเมิน ด้วยบริการที่ช่วยลดความเสี่ยงก่อนเริ่มจ้าง Vendor"
+        />
+        <div className="mt-10">
+          <ServicePackages />
+        </div>
+        <div className="mt-8">
+          <ButtonLink href="/services" variant="secondary">
+            ดูรายละเอียดบริการ
+          </ButtonLink>
+        </div>
+      </Section>
+
+      {/* 7. FAQ */}
+      <Section>
+        <SectionHeading
+          eyebrow="คำถามที่พบบ่อย"
+          title="FAQ"
+          align="center"
+        />
+        <div className="mt-10">
+          <FaqList />
+        </div>
+      </Section>
+
+      {/* 8. Final CTA — lead capture */}
+      <LeadCtaSection
+        tone="navy"
+        headline={LEAD_COPY.proposal}
+        buttons={["contactProject", "quickEstimate", "reviewScope"]}
+      />
+    </>
   );
 }
